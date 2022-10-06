@@ -44,7 +44,7 @@ export class ProductService {
     }
 
     /**
-     * genereate base64 image url
+     * genereate base64 image url dd
      */
     generateBase64Url(contentType: string, buffer: Buffer) {
         return `data:${contentType};base64,${buffer.toString('base64')}`
