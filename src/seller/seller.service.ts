@@ -11,7 +11,6 @@ export class SellerService {
         return await this.productService.create(createProductDto)
     }
 
-    // comment
     async updateProduct(updateProductDto: UpdateProductDto){
         const product = await this.productService.getOneById(updateProductDto.productId);
         if(!product) return new BadRequestError('product not found!')
