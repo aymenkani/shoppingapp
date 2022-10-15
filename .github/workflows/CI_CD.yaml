@@ -17,8 +17,6 @@ jobs:
           node-version: 18.x
       - run: npm ci
       - run: npm run build --if-present
-      - run: git subtree add dist 
-
   deploy:
     needs: build
 
@@ -26,12 +24,11 @@ jobs:
     steps:
       - uses:  actions/checkout@v3
       - uses: akhileshns/heroku-deploy@v3.12.12
-        run: git subtree add dist
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: shopappkani
           heroku_email: "aymenkani554@gmail.com"
-          appdir: "dist"
+          appfolder: "dist"
         env:
           HD_MONGO_URI: ${{secrets.MONGO_URI}}
           HD_JWT_KEY: ${{secrets.JWT_KEY}}
