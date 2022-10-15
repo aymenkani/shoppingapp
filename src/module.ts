@@ -17,7 +17,6 @@ export class AppModule {
         app.set('trust-proxy', true)
 
         app.use(cors({
-            origin: "http://localhost:3000",
             credentials: true,
             optionsSuccessStatus: 200
         }))
@@ -57,6 +56,6 @@ export class AppModule {
         this.app.use(buyerRouters)
         this.app.use(errorHandler)
 
-        this.app.listen(8080, () => console.log('OK! port: 8080'))
+        this.app.listen(process.env.PORT || 8080, () => console.log('OK! port: 8080'))
     }
 }
