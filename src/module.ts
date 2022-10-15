@@ -9,18 +9,19 @@ import mongoose from 'mongoose'
 import { errorHandler, currentUser } from '@shoppingapp/common';
 import { authRouters } from './auth/auth.routers';
 import { sellerRouters } from './seller/seller.routers'
+import { buyerRouters } from './buyer/buyer.routers'
 
 export class AppModule {
     constructor(public app: Application) {
         app.set('trust-proxy', true)
 
         app.use(cors({
-            origin: "*",
+            origin: "http://localhost:3000",
             credentials: true,
             optionsSuccessStatus: 200
         }))
 
-        app.use(urlencoded({ extended: true }))
+        app.use(urlencoded({ extended: false }))
         app.use(json())
         app.use(cookieSession({
             signed: false,
@@ -39,6 +40,10 @@ export class AppModule {
             throw new Error('mongo_uri must be defined')
         }
 
+        if(!process.env.STRIPE_KEY) {
+            throw new Error('STRIPE_KEY must be defined')
+        }
+
         try {
             await mongoose.connect(process.env.MONGO_URI)
         } catch(err) {
@@ -48,6 +53,7 @@ export class AppModule {
         this.app.use(currentUser(process.env.JWT_KEY!))
         this.app.use(authRouters)
         this.app.use(sellerRouters)
+        this.app.use(buyerRouters)
         this.app.use(errorHandler)
 
         this.app.listen(8080, () => console.log('OK! port: 8080'))

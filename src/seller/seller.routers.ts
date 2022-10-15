@@ -1,9 +1,9 @@
 import { Router, Response, Request, NextFunction } from "express";
-import { BadRequestError, Uploader, UploaderMiddlewareOptions, requireAuth, CustomError } from "@shoppingapp/common";
+import { BadRequestError, uploadDir, Uploader, UploaderMiddlewareOptions, requireAuth, CustomError } from "@shoppingapp/common";
 import { sellerService } from './seller.service'
 
 
-const uploader = new Uploader()
+const uploader = new Uploader(uploadDir)
 const middlewareOptions: UploaderMiddlewareOptions = {
     types: ['image/png', 'image/jpeg'],
     fieldName: 'image'
@@ -20,7 +20,7 @@ router.post('/product/new', requireAuth, multipeFilesMiddleware,async (req: Requ
 
     if(req.uploaderError) return next(new BadRequestError(req.uploaderError.message));
 
-    const product = sellerService.addProduct({ 
+    const product = await sellerService.addProduct({ 
         title, 
         price, 
         userId: req.currentUser!.userId, 
