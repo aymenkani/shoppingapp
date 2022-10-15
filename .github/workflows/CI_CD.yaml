@@ -17,7 +17,7 @@ jobs:
           node-version: 18.x
       - run: npm ci
       - run: npm run build --if-present
-      - run: git subtree add dist
+      - run: git subtree add dist 
 
   deploy:
     needs: build
