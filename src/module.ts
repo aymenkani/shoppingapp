@@ -56,6 +56,8 @@ export class AppModule {
         this.app.use(buyerRouters)
         this.app.use(errorHandler)
 
-        this.app.listen(process.env.PORT || 8080, () => console.log('OK! port: 8080'))
+        const PORT = process.env.PORT || 8080
+
+        this.app.listen(PORT , () => console.log('OK! port: '+ PORT))
     }
 }
