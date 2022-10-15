@@ -11,6 +11,7 @@ import { authRouters } from './auth/auth.routers';
 import { sellerRouters } from './seller/seller.routers'
 import { buyerRouters } from './buyer/buyer.routers'
 
+// comment
 export class AppModule {
     constructor(public app: Application) {
         app.set('trust-proxy', true)
