@@ -57,7 +57,7 @@ export class ProductService {
         }
 
         return images.map((file: Express.Multer.File) => {
-            let srcObj = { src: this.generateBase64Url(file.mimetype, file.buffer) }
+            let srcObj = { src: this.generateBase64Url(file.mimetype, fs.readFileSync(path.join(uploadDir + file.filename))) }
             fs.unlink(path.join(uploadDir + file.filename ), () => {})
             return srcObj
         })
