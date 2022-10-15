@@ -23,13 +23,12 @@ jobs:
 
     runs-on: ubuntu-latest
     steps:
-      - name: deploy dist folder to heroku
-        uses:  actions/checkout@v3
-        uses: akhileshns/heroku-deploy@v3.12.12
+      - uses:  actions/checkout@v3
+      - uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: shopappkani
-          heroku_email: "aymenkani554@gmail.com",
+          heroku_email: "aymenkani554@gmail.com"
           appdir: "dist"
         env:
           HD_MONGO_URI: ${{secrets.MONGO_URI}}
