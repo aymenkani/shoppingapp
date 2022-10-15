@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "compile": "tsc && node ./dist/src/main.js",
-    "start": "nodemon -e ts --exec \"npm run compile\" "
+    "start:dev": "nodemon -e ts --exec \"npm run compile\" ",
+    "start": "node ./src/main.js"
   },
   "keywords": [],
   "author": "",

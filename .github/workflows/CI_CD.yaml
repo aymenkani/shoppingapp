@@ -17,6 +17,7 @@ jobs:
           node-version: 18.x
       - run: npm ci
       - run: npm run build --if-present
+      
   deploy:
     needs: build
 
@@ -28,7 +29,7 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: shopappkani
           heroku_email: "aymenkani554@gmail.com"
-          appfolder: "dist"
+          appdir: "dist"
         env:
           HD_MONGO_URI: ${{secrets.MONGO_URI}}
           HD_JWT_KEY: ${{secrets.JWT_KEY}}
